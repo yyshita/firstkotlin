@@ -130,9 +130,20 @@ class MainActivity : AppCompatActivity() {
         println("mSet = $mSet")
 
         //Map
+        val fruits: Map<String, Int> = mapOf("apple" to 1, "orange" to 2, "banana" to 3)
+        println("fruits = $fruits")
+
+        //mutable Map
+        val vegetables: MutableMap<String, Int> = mutableMapOf("green pepper" to 1, "potato" to 2, "eggplant" to 3)
+        println("vegetables.get('potato') = ${vegetables.get("potato")}")
+        println(",")
+        println("vegetables[\"eggplant\"] = ${vegetables["eggplant"]}")
+        vegetables.put("carrot", 4)
+        println("vegetables = $vegetables")
+        vegetables.remove("potato")
+        println("vegetables = $vegetables")
+
         
-
-
     }
 
     companion object {
