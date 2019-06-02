@@ -143,6 +143,28 @@ class MainActivity : AppCompatActivity() {
         vegetables.remove("potato")
         println("vegetables = $vegetables")
 
+        //declare and call function
+        fun times(a: Int, b: Int): Int{
+            return a*b
+        }
+        println("times ${times(2, 5)}\n")
+        Log.e(TAG, "times ${times(2, 5)}\n")
+
+        //declare and call function with no return
+        fun logTimes(a: Int, b: Int): Unit{
+            Log.e(TAG, "log times ${a * b}")
+        }
+        logTimes(3,10)
+
+
+        //omit function declaring and call
+        fun omitTimes(a: Int, b: Int = 2) = a*b
+        Log.e(TAG, "omitTimes = ${omitTimes(2)}")
+
+        //omit function declaring and call with argument name
+        fun calc(a: Int, b:Int=1, c:Int =1, d:Int=1) = a*b - c/d
+        Log.e(TAG, "calc = ${calc(4, c= 3)}")
+
         
     }
 
