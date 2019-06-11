@@ -3,6 +3,9 @@ package com.example.first_kotlin
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     val s = "Kotlin"
@@ -180,17 +183,76 @@ class MainActivity : AppCompatActivity() {
         var inDoLambda:(Int)->Int = {it *10000}
         doLambda(5, inDoLambda)
 
-        //first class
-        val dog = Dog()
-//        dog.set = "Pes"
-//        Log.e(TAG, "dog name = ${dog.name}")
+        //object expression
+        var textView: TextView = TextView(this)
+        textView.setOnClickListener(
+            object: View.OnClickListener{
+                override fun onClick(v: View?): Unit{
+                    textView.text = "Button is tapped"
+                }
+            }
+        )
+
+        //elvis
+        val t : String = s ?: "default"
+        fun lengthNullable(s: String?) = s?.length ?:0
+        Log.e(TAG, "lengthNullable('abcd')  ${lengthNullable("abcd")}")
+        Log.e(TAG, "lengthNullable(null)  ${lengthNullable(null)}")
+
+        //null check
+        val nullCheck: String? = "kotlin"
+        if(nullCheck != null) Log.e(TAG,"null check: ${nullCheck.toUpperCase()}")
+
+        //with func
+        var message: String = with(Dog("Pess")){
+            age = 10
+            message()
+        }
+        Log.e(TAG, "message : $message")
+
+        //apply func
+        var message2:String = Dog("Pochi").apply {
+            age = 11
+        }.message()
+        Log.e(TAG, "message2 : $message2")
+
+        //let func
+        var name:String? = "iilllililiiil"
+        var nameLen:Int? = name?.let{
+            Log.e(TAG, "name ${it.toUpperCase()}")
+            it.length
+        }
+        Log.e(TAG,"nameLen : $nameLen")
+
+        //run func
+        var runner: String? = "Runner"
+        var runnerLen = runner?.run {
+            Log.e(TAG, "runnerLen : ${toUpperCase()}")
+            length
+        }
+        Log.e(TAG, "runnerLen: $runnerLen")
+
+        //Pair
+        var dog = Dog("Momo")
+        val pair = Pair(dog, 2)
+        Log.e(TAG, "the name of the dog is ${pair.first.name}, age is ${pair.second}")
+
+        //pair made of to
+        val useTo = "orange" to 3
+        Log.e(TAG, "${useTo.first} number is ${useTo.second}")
+
+        //extension func
+        fun String.surround() = "["+this+"]"
+        var kotlin:String = "Kotlin"
+        Log.e(TAG, "extension ${kotlin.surround()}")
     }
 
-    //first class
-    inner class Dog{
-        val name: String
-            get() {return name}
-//            set(name) {this.name = name}
+    //class
+    inner class Dog(var name: String){
+        var age: Int = 5
+        fun message():String{
+            return "Dog is $name, $age year old"
+        }
     }
 
 
