@@ -165,7 +165,37 @@ class MainActivity : AppCompatActivity() {
         fun calc(a: Int, b:Int=1, c:Int =1, d:Int=1) = a*b - c/d
         Log.e(TAG, "calc = ${calc(4, c= 3)}")
 
-        
+
+        //lambda
+        var minus = {x: Int , y: Int -> x - y}
+        Log.e(TAG, "minus = ${minus(3, 8)}")
+
+
+        //lambda
+        var lambda:(Int)->Int =  {it * 3}
+        Log.e(TAG, "lambda = ${lambda(3)}")
+
+        //do lambda
+        fun doLambda(x: Int, l:(Int)->Int) = l(x)
+        var inDoLambda:(Int)->Int = {it *10000}
+        doLambda(5, inDoLambda)
+
+        //first class
+        val dog = Dog()
+//        dog.set = "Pes"
+//        Log.e(TAG, "dog name = ${dog.name}")
+    }
+
+    //first class
+    inner class Dog{
+        val name: String
+            get() {return name}
+//            set(name) {this.name = name}
+    }
+
+
+    interface Hound{
+        fun hunt()
     }
 
     companion object {
